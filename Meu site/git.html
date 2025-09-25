@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Acesse Meu Github</title>
+  <style>
+    /* Reset mínimo */
+    :root{
+      --bg: #0f1724;
+      --fg: #ffffff;
+      --accent: #2ea44f; /* verde GitHub */
+      --accent-2: #28a745;
+      --muted: rgba(255,255,255,0.85);
+      --glass: rgba(255,255,255,0.04);
+      --shadow: 0 6px 18px rgba(2,6,23,0.6);
+      --radius: 12px;
+      --pad-y: 10px;
+      --pad-x: 16px;
+      --transition-fast: 180ms cubic-bezier(.2,.9,.3,1);
+    }
+
+    body{
+      background: linear-gradient(180deg,#0b1220 0%, #071021 100%);
+      color: var(--fg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      min-height: 100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+    }
+
+    /* Botão principal */
+    .gh-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(180deg,var(--accent), var(--accent-2));
+      color: #fff;
+      padding: var(--pad-y) var(--pad-x);
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      box-shadow: var(--shadow);
+      font-weight: 600;
+      font-size: 16px;
+      line-height: 1;
+      text-decoration: none;
+      transform: translateZ(0);
+      user-select: none;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), filter var(--transition-fast);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .gh-btn .gh-icon {
+      width:20px;
+      height:20px;
+      display:inline-block;
+      flex-shrink:0;
+      filter: drop-shadow(0 1px 0 rgba(0,0,0,0.15));
+      transition: transform var(--transition-fast);
+    }
+
+    /* Hover / focus / active */
+    .gh-btn:hover,
+    .gh-btn:focus{
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 10px 26px rgba(2,6,23,0.65);
+      outline: none;
+    }
+
+    .gh-btn:active{
+      transform: translateY(0) scale(0.995);
+      box-shadow: 0 6px 14px rgba(2,6,23,0.6);
+    }
+
+    /* Focus acessível */
+    .gh-btn:focus-visible{
+      box-shadow: 0 0 0 4px rgba(46,164,79,0.16), var(--shadow);
+      border-radius: calc(var(--radius) + 2px);
+    }
+
+    /* Versão "ghost" com fundo transparente e borda sutil (ideal em fundos claros) */
+    .gh-btn.ghost{
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      color: var(--muted);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: none;
+    }
+
+    .gh-btn.ghost .gh-icon { filter: none; }
+
+    /* Pequeno badge de contagem (ex: stars) */
+    .gh-badge {
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background: rgba(0,0,0,0.25);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 13px;
+      margin-left: 8px;
+      box-shadow: 0 4px 10px rgba(2,6,23,0.5);
+    }
+
+    /* Efeito de "ripple" simples com pseudo-elemento */
+    .gh-btn.ripple {
+      position: relative;
+      overflow: hidden;
+    }
+    .gh-btn.ripple::after{
+      content:"";
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:0;
+      height:0;
+      background: rgba(255,255,255,0.16);
+      border-radius:50%;
+      transform: translate(-50%,-50%);
+      transition: width 450ms ease, height 450ms ease, opacity 450ms ease;
+      opacity:0;
+      pointer-events:none;
+    }
+    .gh-btn.ripple:active::after{
+      width:260px;
+      height:260px;
+      opacity:1;
+      transition: width 350ms ease, height 350ms ease, opacity 500ms ease;
+    }
+
+    /* Responsividade */
+    @media (max-width:420px){
+      .gh-btn { font-size:15px; padding:10px 14px; gap:8px; }
+      .gh-badge { display:none; } /* esconder badge em telas pequenas */
+    }
+
+    /* Respeitar preferências de redução de movimento */
+    @media (prefers-reduced-motion: reduce){
+      .gh-btn, .gh-btn .gh-icon { transition: none; }
+      .gh-btn.ripple::after { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Botão principal (link) - ideal para "Star" no GitHub ou link para repo -->
+  <a class="gh-btn ripple" href="https://github.com/Weeydev/meus-conhecimentos" target="_blank" rel="noopener noreferrer" aria-label="Abrir repositório no GitHub">
+    <!-- SVG do ícone do GitHub (monochrome) -->
+    <svg class="gh-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+      <path fill="currentColor" d="M12 .5C5.73.5.75 5.48.75 11.76c0 4.93 3.19 9.11 7.61 10.59.56.1.77-.24.77-.54 0-.27-.01-.98-.02-1.92-3.09.67-3.74-1.49-3.74-1.49-.5-1.27-1.22-1.61-1.22-1.61-.99-.68.07-.67.07-.67 1.09.08 1.67 1.12 1.67 1.12.97 1.66 2.54 1.18 3.16.9.1-.7.38-1.18.69-1.45-2.47-.28-5.07-1.24-5.07-5.53 0-1.22.44-2.21 1.16-2.99-.12-.28-.5-1.41.11-2.94 0 0 .95-.31 3.11 1.15a10.8 10.8 0 0 1 2.83-.38c.96.01 1.93.13 2.83.38 2.15-1.46 3.1-1.15 3.1-1.15.61 1.53.23 2.66.12 2.94.72.78 1.16 1.77 1.16 2.99 0 4.3-2.61 5.25-5.09 5.52.39.34.73 1.02.73 2.06 0 1.49-.01 2.69-.01 3.06 0 .3.2.65.78.54 4.4-1.49 7.58-5.66 7.58-10.59C23.25 5.48 18.27.5 12 .5z"/>
+    </svg>
+
+    <span>Visitar no GitHub</span>
+
+
+    
+  </a>
+
+  <!-- Exemplo de botão ghost -->
+  <a class="gh-btn ghost ripple" href="https://github.com/Weeydev" style="margin-left:18px" target="_blank" rel="noopener noreferrer" aria-label="Abrir perfil GitHub">
+    <svg class="gh-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+      <path fill="currentColor" d="M12 .5C5.73.5.75 5.48.75 11.76c0 4.93 3.19 9.11 7.61 10.59.56.1.77-.24.77-.54 0-.27-.01-.98-.02-1.92-3.09.67-3.74-1.49-3.74-1.49-.5-1.27-1.22-1.61-1.22-1.61-.99-.68.07-.67.07-.67 1.09.08 1.67 1.12 1.67 1.12.97 1.66 2.54 1.18 3.16.9.1-.7.38-1.18.69-1.45-2.47-.28-5.07-1.24-5.07-5.53 0-1.22.44-2.21 1.16-2.99-.12-.28-.5-1.41.11-2.94 0 0 .95-.31 3.11 1.15a10.8 10.8 0 0 1 2.83-.38c.96.01 1.93.13 2.83.38 2.15-1.46 3.1-1.15 3.1-1.15.61 1.53.23 2.66.12 2.94.72.78 1.16 1.77 1.16 2.99 0 4.3-2.61 5.25-5.09 5.52.39.34.73 1.02.73 2.06 0 1.49-.01 2.69-.01 3.06 0 .3.2.65.78.54 4.4-1.49 7.58-5.66 7.58-10.59C23.25 5.48 18.27.5 12 .5z"/>
+    </svg>
+    <span>Meu Perfil</span>
+  </a>
+</body>
+</html>
